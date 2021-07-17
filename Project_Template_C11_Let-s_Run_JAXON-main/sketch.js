@@ -1,4 +1,4 @@
-var trackImage, track, track2, invRightEdge, invLeftEdge;
+var trackImage, track, track2, invRightEdge, invLeftEdge, invTopEdge;
 var playerImage, player;
 
 function preload(){
@@ -22,26 +22,33 @@ function setup(){
   player = createSprite(200, 200);
   player.addAnimation("running", playerImage);
   player.scale = 0.1;
+  player.velocityY = -2;
 
   //createing invisible right edge
-  invRightEdge = createSprite(10, 10, 10, 400);
+  invRightEdge = createSprite(0, 0, 100, 800);
   invRightEdge.visible = false;
 
   //creating left edge
-  invLeftEdge = createSprite(390, 10, 10, 400);
+  invLeftEdge = createSprite(410, 0, 100, 800);
   invLeftEdge.visible = false;
+
+  //creating top edge
+  invTopEdge = createSprite(10, 10, 400, 10);
+  invTopEdge.visible = false;
 }
 
 function draw() {
   background(220);
 
+  player.collide(edges[3]);
+
+  createEdgeSprites();
+
   player.x = World.mouseX;
 
-  player.collide(invLeftEdge, invRightEdge);
-
   if(track.y>400){
-    track.y = track.length/2;
+    track.y = height/2;
   }
-
   drawSprites();
+
 }
