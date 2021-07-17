@@ -40,9 +40,9 @@ function setup(){
 function draw() {
   background(220);
 
-  player.collide(edges[3]);
-
   createEdgeSprites();
+
+  player.collide(edges[3]);
 
   player.x = World.mouseX;
 
