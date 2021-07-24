@@ -1,5 +1,6 @@
 var trackImage, track, track2, invRightEdge, invLeftEdge, invTopEdge;
 var playerImage, player;
+var edges;
 
 function preload(){
   //pre-load images
@@ -22,7 +23,6 @@ function setup(){
   player = createSprite(200, 200);
   player.addAnimation("running", playerImage);
   player.scale = 0.1;
-  player.velocityY = -2;
 
   //createing invisible right edge
   invRightEdge = createSprite(0, 0, 100, 800);
@@ -40,8 +40,13 @@ function setup(){
 function draw() {
   background(220);
 
+  track.velocityY = 4;
+  player.collide(invLeftEdge);
+  player.collide(invRightEdge);
+
   createEdgeSprites();
 
+  edges = new Group();
   player.collide(edges[3]);
 
   player.x = World.mouseX;
